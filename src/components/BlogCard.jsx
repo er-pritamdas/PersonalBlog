@@ -10,54 +10,75 @@ const BlogCard = ({ blog, index, isFeatured }) => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            className={`group relative rounded-2xl overflow-hidden flex flex-col h-full ${!isFeatured ? 'bg-slate-900/50 border border-slate-800 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all' : ''}`}
+            className="h-full"
         >
-            {/* Image */}
-            <div className="relative h-48 overflow-hidden">
-                <img
-                    src={blog.image}
-                    alt={blog.topic}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60" />
-                <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-black/50 backdrop-blur-md text-cyan-400 text-xs font-bold rounded-full border border-cyan-500/30">
-                        {blog.category}
-                    </span>
-                </div>
-            </div>
-
-            {/* Content */}
-            <div className="p-6 flex-1 flex flex-col">
-                <div className="flex items-center gap-2 text-slate-400 text-xs mb-3">
-                    <Calendar size={14} />
-                    <span>{blog.date}</span>
-                </div>
-
-                <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors line-clamp-2">
-                    {blog.topic}
-                </h3>
-
-                <p className="text-slate-400 text-sm mb-4 line-clamp-2 flex-1">
-                    {blog.description}
-                </p>
-
-                {/* Tech Tags */}
-                <div className="flex flex-wrap gap-2 mb-6">
-                    {blog.tech.slice(0, 3).map((tech, i) => (
-                        <span key={i} className="text-xs px-2 py-1 bg-slate-800 text-slate-300 rounded border border-slate-700">
-                            {tech}
+            <Link
+                to={`/blog/${blog.id}`}
+                className={`group relative rounded-2xl overflow-hidden flex flex-col h-full ${!isFeatured ? 'bg-slate-900/50 border border-slate-800 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all' : ''}`}
+            >
+                {/* Image */}
+                <div className="relative h-48 overflow-hidden">
+                    <img
+                        src={blog.image}
+                        alt={blog.topic}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent opacity-60" />
+                    <div className="absolute top-4 left-4">
+                        <span className="px-3 py-1 bg-black/50 backdrop-blur-md text-cyan-400 text-xs font-bold rounded-full border border-cyan-500/30">
+                            {blog.category}
                         </span>
-                    ))}
+                    </div>
                 </div>
 
-                <Link
-                    to={`/blog/${blog.id}`}
-                    className="inline-flex items-center gap-2 text-cyan-400 font-medium text-sm group-hover:gap-3 transition-all mt-auto"
-                >
-                    Read Article <ArrowRight size={16} />
-                </Link>
-            </div>
+                {/* Content */}
+                <div className="p-6 flex-1 flex flex-col min-h-[280px]">
+                    <div className="flex items-center gap-2 text-slate-400 text-xs mb-3">
+                        <Calendar size={14} />
+                        <span>{blog.date}</span>
+                        <span>•</span>
+                        <span>{blog.category}</span>
+                    </div>
+
+                    <h3 className="text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors line-clamp-2">
+                        {blog.topic}
+                    </h3>
+
+                    {/* Subtitle */}
+                    {blog.subtitle && (
+                        <p className="text-slate-300 text-sm mb-3 font-medium line-clamp-2">
+                            {blog.subtitle}
+                        </p>
+                    )}
+
+                    <p className="text-slate-400 text-sm mb-4 flex-1">
+                        {blog.description.length > 100
+                            ? `${blog.description.substring(0, 100)}... `
+                            : blog.description}
+                        {blog.description.length > 100 && (
+                            <span className="text-cyan-400 font-medium hover:underline ml-1">more</span>
+                        )}
+                    </p>
+
+                    {/* Tech Tags */}
+                    <div className="flex flex-wrap gap-2 mb-6">
+                        {blog.tech.slice(0, 3).map((tech, i) => (
+                            <span key={i} className="text-xs px-2 py-1 bg-slate-800 text-slate-300 rounded border border-slate-700">
+                                {tech}
+                            </span>
+                        ))}
+                        {blog.tech.length > 3 && (
+                            <span className="text-xs px-2 py-1 bg-slate-800 text-slate-300 rounded border border-slate-700">
+                                +{blog.tech.length - 3}
+                            </span>
+                        )}
+                    </div>
+
+                    <div className="inline-flex items-center gap-2 text-cyan-400 font-medium text-sm group-hover:gap-3 transition-all mt-auto">
+                        Read Article <ArrowRight size={16} />
+                    </div>
+                </div>
+            </Link>
         </motion.div>
     );
 };

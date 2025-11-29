@@ -15,14 +15,14 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                     <ChevronLeft size={20} />
                 </button>
 
-                <div className="flex flex-col gap-1 py-2">
+                <div className="flex flex-col gap-1 py-2 items-center">
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                         <button
                             key={page}
                             onClick={() => onPageChange(page)}
-                            className={`w-2 h-2 rounded-full transition-all ${currentPage === page
-                                ? 'bg-cyan-400 h-4'
-                                : 'bg-slate-600 hover:bg-slate-500'
+                            className={`rounded-full transition-all duration-300 ${currentPage === page
+                                ? 'bg-cyan-400 h-8 w-1.5 shadow-[0_0_10px_rgba(34,211,238,0.5)]'
+                                : 'bg-slate-700 hover:bg-slate-500 h-1.5 w-1.5'
                                 }`}
                             aria-label={`Go to page ${page}`}
                         />

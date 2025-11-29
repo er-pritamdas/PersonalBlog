@@ -58,13 +58,17 @@ const TableOfContents = ({ content }) => {
                         <a
                             key={id}
                             href={`#${id}`}
-                            className={`block text-sm py-1 transition-colors border-l-2 pl-4 ${activeId === id
-                                ? 'border-cyan-400 text-white'
+                            className={`block text-sm py-1.5 transition-all border-l-2 pl-4 ${activeId === id
+                                ? 'border-cyan-400 text-cyan-400 font-medium bg-cyan-950/20 rounded-r-lg'
                                 : 'border-transparent text-slate-500 hover:text-slate-300 hover:border-slate-700'
                                 } ${level === 3 ? 'ml-4' : ''}`}
                             onClick={(e) => {
                                 e.preventDefault();
-                                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+                                const element = document.getElementById(id);
+                                if (element) {
+                                    const y = element.getBoundingClientRect().top + window.scrollY - 100;
+                                    window.scrollTo({ top: y, behavior: 'smooth' });
+                                }
                                 setActiveId(id);
                             }}
                         >

@@ -23,14 +23,14 @@ const Navbar = () => {
     }, [location]);
 
     return (
-        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/70 backdrop-blur-xl border-b border-white/10 shadow-lg shadow-black/20' : 'bg-transparent'
+        <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b ${scrolled ? 'bg-slate-950/70 backdrop-blur-xl border-white/10 shadow-lg shadow-black/20' : 'bg-transparent border-transparent'
             }`}>
             <div className="max-w-7xl mx-auto px-6">
                 <div className="flex items-center justify-between h-20">
                     {/* Logo */}
                     <Link to="/" className="text-2xl font-bold text-white relative group tracking-tight">
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500">
-                            {personalInfo.name}
+                            PritamDas._
                         </span>
                         <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-400 to-blue-500 transition-all group-hover:w-full" />
                     </Link>
