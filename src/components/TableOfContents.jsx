@@ -46,7 +46,7 @@ const TableOfContents = ({ content }) => {
         <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
-            className="hidden xl:block fixed left-8 top-80 w-64 z-40"
+            className="hidden xl:block fixed left-8 top-64 w-64 z-40"
         >
             <div className="bg-slate-900/50 backdrop-blur-sm border border-slate-800 rounded-xl p-6">
                 <div className="flex items-center gap-2 text-cyan-400 mb-4 font-bold">

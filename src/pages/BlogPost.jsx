@@ -84,11 +84,31 @@ const BlogPost = () => {
                     <ReactMarkdown
                         components={{
                             h2: ({ node, ...props }) => {
-                                const id = props.children[0]?.toString().toLowerCase().replace(/[^\w]+/g, '-');
+                                const getText = (children) => {
+                                    if (typeof children === 'string') return children;
+                                    if (Array.isArray(children)) {
+                                        return children.map(child => getText(child)).join('');
+                                    }
+                                    if (children?.props?.children) {
+                                        return getText(children.props.children);
+                                    }
+                                    return '';
+                                };
+                                const id = getText(props.children).toLowerCase().replace(/[^\w]+/g, '-');
                                 return <h2 id={id} {...props} />;
                             },
                             h3: ({ node, ...props }) => {
-                                const id = props.children[0]?.toString().toLowerCase().replace(/[^\w]+/g, '-');
+                                const getText = (children) => {
+                                    if (typeof children === 'string') return children;
+                                    if (Array.isArray(children)) {
+                                        return children.map(child => getText(child)).join('');
+                                    }
+                                    if (children?.props?.children) {
+                                        return getText(children.props.children);
+                                    }
+                                    return '';
+                                };
+                                const id = getText(props.children).toLowerCase().replace(/[^\w]+/g, '-');
                                 return <h3 id={id} {...props} />;
                             }
                         }}

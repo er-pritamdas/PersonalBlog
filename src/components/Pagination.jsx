@@ -5,8 +5,8 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
     if (totalPages <= 1) return null;
 
     return (
-        <div className="fixed right-6 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
-            <div className="flex flex-col items-center gap-2 bg-slate-900/50 backdrop-blur-md p-2 rounded-full border border-slate-800 shadow-xl">
+        <div className="fixed right-8 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
+            <div className="flex flex-col items-center gap-4 bg-slate-900/50 backdrop-blur-md p-2 rounded-full border border-slate-800 shadow-xl">
                 <button
                     onClick={() => onPageChange(Math.max(1, currentPage - 1))}
                     disabled={currentPage === 1}
@@ -15,7 +15,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                     <ChevronLeft size={20} />
                 </button>
 
-                <div className="flex flex-col gap-1 py-2 items-center">
+                <div className="flex flex-col gap-3 py-10 items-center">
                     {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
                         <button
                             key={page}
