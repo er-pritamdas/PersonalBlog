@@ -37,7 +37,7 @@ const BlogPost = () => {
 
     return (
         <article className="min-h-screen pt-24 pb-20 relative">
-            <TableOfContents content={content} />
+
 
             {/* Hero Image */}
             <div className="relative h-[40vh] w-full mb-12 overflow-hidden">
@@ -78,54 +78,64 @@ const BlogPost = () => {
                 </div>
             </div>
 
-            {/* Content */}
-            <div className="max-w-3xl mx-auto px-6">
-                <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-slate-300 prose-a:text-cyan-400 hover:prose-a:text-cyan-300 prose-strong:text-white prose-code:text-cyan-300 prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-800">
-                    <ReactMarkdown
-                        components={{
-                            h2: ({ node, ...props }) => {
-                                const getText = (children) => {
-                                    if (typeof children === 'string') return children;
-                                    if (Array.isArray(children)) {
-                                        return children.map(child => getText(child)).join('');
-                                    }
-                                    if (children?.props?.children) {
-                                        return getText(children.props.children);
-                                    }
-                                    return '';
-                                };
-                                const id = getText(props.children).toLowerCase().replace(/[^\w]+/g, '-');
-                                return <h2 id={id} {...props} />;
-                            },
-                            h3: ({ node, ...props }) => {
-                                const getText = (children) => {
-                                    if (typeof children === 'string') return children;
-                                    if (Array.isArray(children)) {
-                                        return children.map(child => getText(child)).join('');
-                                    }
-                                    if (children?.props?.children) {
-                                        return getText(children.props.children);
-                                    }
-                                    return '';
-                                };
-                                const id = getText(props.children).toLowerCase().replace(/[^\w]+/g, '-');
-                                return <h3 id={id} {...props} />;
-                            }
-                        }}
-                    >
-                        {content}
-                    </ReactMarkdown>
-                </div>
+            {/* Content Layout */}
+            <div className="max-w-7xl mx-auto px-6">
+                <div className="flex gap-12 relative items-start">
+                    {/* Sticky Table of Contents Sidebar */}
+                    <div className="hidden xl:block sticky top-32 h-fit shrink-0">
+                        <TableOfContents content={content} />
+                    </div>
 
-                {/* Tags */}
-                <div className="mt-12 pt-8 border-t border-slate-800">
-                    <h3 className="text-white font-bold mb-4">Technologies</h3>
-                    <div className="flex flex-wrap gap-2">
-                        {blog.tech.map((tech, i) => (
-                            <span key={i} className="px-3 py-1 bg-slate-900 text-slate-300 rounded-full text-sm border border-slate-800">
-                                {tech}
-                            </span>
-                        ))}
+                    {/* Main Content */}
+                    <div className="flex-1 max-w-3xl">
+                        <div className="prose prose-invert prose-lg max-w-none prose-headings:text-white prose-p:text-slate-300 prose-a:text-cyan-400 hover:prose-a:text-cyan-300 prose-strong:text-white prose-code:text-cyan-300 prose-pre:bg-slate-900 prose-pre:border prose-pre:border-slate-800">
+                            <ReactMarkdown
+                                components={{
+                                    h2: ({ node, ...props }) => {
+                                        const getText = (children) => {
+                                            if (typeof children === 'string') return children;
+                                            if (Array.isArray(children)) {
+                                                return children.map(child => getText(child)).join('');
+                                            }
+                                            if (children?.props?.children) {
+                                                return getText(children.props.children);
+                                            }
+                                            return '';
+                                        };
+                                        const id = getText(props.children).toLowerCase().replace(/[^\w]+/g, '-');
+                                        return <h2 id={id} {...props} />;
+                                    },
+                                    h3: ({ node, ...props }) => {
+                                        const getText = (children) => {
+                                            if (typeof children === 'string') return children;
+                                            if (Array.isArray(children)) {
+                                                return children.map(child => getText(child)).join('');
+                                            }
+                                            if (children?.props?.children) {
+                                                return getText(children.props.children);
+                                            }
+                                            return '';
+                                        };
+                                        const id = getText(props.children).toLowerCase().replace(/[^\w]+/g, '-');
+                                        return <h3 id={id} {...props} />;
+                                    }
+                                }}
+                            >
+                                {content}
+                            </ReactMarkdown>
+                        </div>
+
+                        {/* Tags */}
+                        <div className="mt-12 pt-8 border-t border-slate-800">
+                            <h3 className="text-white font-bold mb-4">Technologies</h3>
+                            <div className="flex flex-wrap gap-2">
+                                {blog.tech.map((tech, i) => (
+                                    <span key={i} className="px-3 py-1 bg-slate-900 text-slate-300 rounded-full text-sm border border-slate-800">
+                                        {tech}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

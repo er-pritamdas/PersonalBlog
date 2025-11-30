@@ -1,12 +1,12 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
+const Pagination = ({ currentPage, totalPages, onPageChange, className = '' }) => {
     if (totalPages <= 1) return null;
 
     return (
-        <div className="fixed right-8 top-1/2 -translate-y-1/2 flex flex-col gap-4 z-40">
-            <div className="flex flex-col items-center gap-4 bg-slate-900/50 backdrop-blur-md p-2 rounded-full border border-slate-800 shadow-xl">
+        <div className={`flex flex-col gap-4 ${className}`}>
+            <div className="flex flex-col items-center bg-slate-900/50 backdrop-blur-md p-2 rounded-full border border-slate-800 shadow-xl">
                 <button
                     onClick={() => onPageChange(Math.max(1, currentPage - 1))}
                     disabled={currentPage === 1}
@@ -37,7 +37,7 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
                     <ChevronRight size={20} />
                 </button>
             </div>
-            <div className="text-center text-xs text-slate-500 font-mono">
+            <div className="text-center text-sm text-slate-400 font-mono">
                 {currentPage} / {totalPages}
             </div>
         </div>
